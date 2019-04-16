@@ -6,11 +6,11 @@ title:  Team
 # {{ page.title }}
 
 
-## USER 1
+## Brennan Tracy
 ***UCI Net ID***: ucinetid1
 
-## USER 2
+## Pooya Khosravi
 ***UCI Net ID***: ucinetid2
 
-## USER 3
+## Sarah Rich
 ***UCI Net ID***: ucinetid3
