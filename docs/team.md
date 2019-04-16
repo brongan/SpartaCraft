@@ -7,7 +7,7 @@ title:  Team
 
 
 ## Brennan Tracy
-***UCI Net ID***: ucinetid1
+***UCI Net ID***: BSTRACY
 
 ## Pooya Khosravi
 ***UCI Net ID***: ucinetid2
