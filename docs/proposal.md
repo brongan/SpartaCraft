@@ -19,12 +19,12 @@ The battle will occur in a destructible arena. We have goals corresponding to ou
 As input the agent will receive a grid view of the surrounding world, as well as the agent's current heatlh and inventory.
 Actions for the agent will be generated as output.
 At present, we are deciding between 2 different methods for representing the environment space:
--  The actions will be the optimal move for the agent to make given the current environment, eg. move away or build shelter to evade attack, attack the enemy, switch weapons, etc.
+- The actions will be the optimal move for the agent to make given the current environment, e.g. move away or build shelter to evade attack, attack the enemy, switch weapons, etc.
 - The action space will be a reasonable subset of Malmo's HumanLevelCommands.
 
 ### Applications
 
-Our application would be entertainment on a Minecraft Server or Youtube video. 
+Our application would be entertainment on a Minecraft Server or for a Youtube video. 
 
 <!-- ### Instructions
 In a paragraph or so, mention the main idea behind your project. Focus on the problem setup, not the solution, i.e.
@@ -65,6 +65,9 @@ Paragraph 2: Describe what qualitative analysis you will show to verify the proj
         - Baseline: We expect a naive agent to die with in ~5 seconds depending on our enemy and environement specifics.
         - Human Score: The team will each do 10 runs of the mission and compute long a human can survive in our gladiator arena environment.
         - Improvement: We expect the agent to lower the time to kill all enemies to within an order of magnitude of a human depending on the environment.
+
+For qualitative analysis, we would like to get close/surpass Human Score levels for each mission type.
+
 
 ## Appointment
 Monday, April 22
