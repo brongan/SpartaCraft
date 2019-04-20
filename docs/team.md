@@ -13,4 +13,4 @@ title:  Team
 ***UCI Net ID***: POOYAK
 
 ## Sarah Rich
-***UCI Net ID***: ucinetid3
+***UCI Net ID***: snrich
