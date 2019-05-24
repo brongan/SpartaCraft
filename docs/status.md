@@ -4,7 +4,7 @@ title: Status
 ---
 (put video here)
 
-# Project Summary
+## Project Summary
 Our original goal was to have the agent (Spartos) learn how to fight against three different types of mobs on the field, altering its battle stragegy according to the type of mob encountered (passive mobs, aggressive mobs, endless mobs)
 
 This was scaled down due to feasibility issues. We decided that, out of all the possible battle strategies Spartos could learn from our previous idea, we wanted to prioritize a hyper-aggressive agent that values pursuing enemies as much as possible. Our updated problem formulation is as follows:
@@ -18,19 +18,19 @@ After successfully training Spartos to hunt a single enemy, the next step will b
 __Goal__:<br>
 The ultimate goal for Spartos will be for it to either fight well against a variety of enemies, or in a complicated arena (or potentially both if time allows). We will start by adding different enemies and adding obstacles to the arena separately. If both work reasonably well, we will attempt to merge the 2 environments.
 
-# Approach
+## Approach
 We are using policy-based reinforcement learning with Deep Q-Learning to approximate Q values for a discrete action space.
 
 To achieve our baseline goal, we've spawned the agent, equipped with an enchanted sword, and a single zombie in a flat 5x5 room with no obstacles.
 
-## State
+### State
 The algorithm receives as input the state, which is made up of:
 - Health of the agent
 - Coordinates of the agent
 - Coordinates of the enemies
 - Elapsed time of episode
 
-## Actions
+### Actions
 At any given state, the actions available to the agent are:
 - Start moving forwards
 - Start moving backwards
@@ -40,7 +40,7 @@ At any given state, the actions available to the agent are:
 - Stop turning
 - Attack
 
-## Rewards
+### Rewards
 The agent receives the following rewards for the following events:
 - Agent lands successful hit/kill: +40
 - Agent takes damage: -5
@@ -48,14 +48,14 @@ The agent receives the following rewards for the following events:
 - Agent survives a state: +0.03
 - Proximity reward (not yet implemented; may need to add to increase the aggressiveness of the agent)
 
-# Evaluation
+## Evaluation
 
-# Remaining Goals & Challenges
+## Remaining Goals & Challenges
 - Put Spartos against a variety of enemies, or a horde of one type of enemy
 - Reduce strength of sword so Spartos has to go in for multiple hits
 - Add verticality to the arena by adding obstacles and cliffs
 
-# Resources Used
+## Resources Used
 __RL Algorithms__:<br>
 - http://incompleteideas.net/book/RLbook2018.pdf
 - http://incompleteideas.net/tiles/tiles3.html
