@@ -50,6 +50,10 @@ The agent receives the following rewards for the following events:
 
 ## Evaluation
 
+To evaluate our learning model, we developed two agents that we can compare agent to:  
+1. Agent taking random action (same actions as our agent) throughout an entire duration of an episode.
+2. Agent following an algorithm that can form the zombies into a train, and take the ones that get close. This algorithm consists of scoring the importance of each zombie based on their distance to the player, and then using that score to determine which direction the player needs to turn to. In addition to turning, the agent moves backward with a probability of 65%, and for the remaining 35%, the agent decides to strafe left or right with equal probability. 
+
 ## Remaining Goals & Challenges
 - Put Spartos against a variety of enemies, or a horde of one type of enemy
 - Reduce strength of sword so Spartos has to go in for multiple hits
