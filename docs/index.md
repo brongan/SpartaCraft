@@ -7,7 +7,7 @@ title:  Home
 
 Our team has created and trained a gladiatorial-style fighter agent, Spartos, by utilizing Minecraft’s Project Malmo platform. Like any respectable gladiator, Spartos will learn to defeat a variety of enemies in combat quickly and aggressively.
 
-Source code: https://github.com/HBBrennan/SpartaCraft
+Source code: https://github.com/pooyakhosravi/SpartaCraft
 
 Reports:
 
