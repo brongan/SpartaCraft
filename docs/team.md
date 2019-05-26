@@ -7,10 +7,10 @@ title:  Team
 
     
 ## Brennan Tracy
-***UCI Net ID***: BSTRACY
+***UCI Net ID***: bstracy
 
 ## Pooya Khosravi
-***UCI Net ID***: POOYAK
+***UCI Net ID***: pooyak
 
 ## Sarah Rich
 ***UCI Net ID***: snrich
