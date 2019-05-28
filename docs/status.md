@@ -19,11 +19,14 @@ __Goal__:<br>
 The ultimate goal for Spartos will be for it to either fight well against a variety of enemies, or in a complicated arena (or potentially both if time allows). We will start by adding different enemies and adding obstacles to the arena separately. If both work reasonably well, we will attempt to merge the 2 environments.
 
 ## Approach
-We are using Vanilla Policy Gradient to predict actions based on the observation. We've experimented with observing position and position + velocity.
+We are using Vanilla Policy Gradient as our reinforcment learning algorithm. We've experimented with observing position and position + velocity. Currently, we have position and velocity represented as floats for the x and z dimensions.
 
+In our Baseline scenario, the agent receives as its observation solely it's current position. The Vanilla Policy Gradient algorithm predicts action probabilities and an action is selected based on those probabilities. Notably, it observes nothing related to the location of the zombie in the room. Weights are updated every 5 episodes based on the discounted rewards over each episode. 
 
 ### Vanilla Policy Gradient:
 We restructured Arthur Juliani's implementation of Vanilla Policy gradient to work with any environment and save checkpoints etc.
+
+Gradient Calculation and Update Equation:
 
 {% raw %}
 $$ \nabla_\theta J(\pi_\theta) = E_{\tau \sim  \pi_\theta} \left[\sum^T_{t=0} \nabla_{\theta}\log \pi_{\theta}(a_t|s_t)A^{\pi_\theta}(s_t,a_t)\right]$$
@@ -32,10 +35,12 @@ $$ \theta_{k+1} = \theta_k + \alpha \nabla_{\theta}J(\pi_{\theta_k}) $$
 
 To achieve our baseline goal, we've spawned the agent, equipped with an enchanted sword, and a single zombie in a flat 5x5 room with no obstacles. Both the agent and the zombie consistently appear at the same location. Notably, the location of the zombie isn't represented anywhere in the agent's observation of the environment.
 
+### MDP
+Using Malmo's "HumanLevelCommands", our agent selects actions analogous to human key presses. It then receives an observation after 4 Minecraft ticks. We discretized time and our action space this way as our goal is to have the agent appear to act as humanly as possible.
+
 ### State
 The algorithm receives as input the state, which is made up of:
 - Coordinates of the agent
-- Velocity of the agent (sometimes)
 
 ### Actions
 At any given state, the actions available to the agent are:
@@ -56,14 +61,26 @@ The agent receives the following rewards for the following events:
 - Time(per agent tick): -1.0
 
 ## Evaluation
+
+### Agents to Compare Against
 To evaluate our learning model, we developed two agents that we can compare agent to:  
 1. Agent taking random actions (same action space as our agent) throughout an entire duration of an episode.
-2. Agent following an algorithm that can form the zombies into a train, and take the ones that get close. This algorithm consists of scoring the importance of each zombie based on their distance to the player, and then using that score to determine which direction the player needs to turn to. In addition to turning, the agent moves backward with a probability of 65%, and for the remaining 35%, the agent decides to strafe left or right with equal probability. 
+2. Agent following an algorithm that can form the zombies into a train, and take the ones that get close. This algorithm consists of scoring the importance of each zombie based on their distance to the player, and then using that score to determine which direction the player needs to turn to. In addition to turning, the agent moves backward with a probability of 65%, and for the remaining 35%, the agent decides to strafe left or right with equal probability.
+
+### Comparison Metrics
+Quantitatively, we evaluate our agents by the total rewards they generate and amount of time they take per episode.  Our rewards are simple and clearly imply how many enemies died, and whether the agent died/took damage. Most importantly our agent is compared in these metrics with the random agent and the "perfect" agent. 
+
+Qualitatively, our goal is for the agent to appear intelligent. We want it to appear to be as close to an efficient killing machine as possible. This means not wasting time attacking nothing, not walking towards enemies, and taking damage. Realistically this can only be measured by a person watching a video of the agents acting. The "perfect" agent clearly demonstrates a strategy it is using.
 
 ## Remaining Goals & Challenges
 - Put Spartos against a variety of enemies, or a horde of one type of enemy
+    - We intend to represent observations with multiple enemies as gridworlds and add convolutional layer(s) to our neural network.
 - Reduce strength of sword so Spartos has to go in for multiple hits
+    - An observation will be the total health of enemies in a given tile.
+    - We also plan to add our agent's health to his state.
 - Add verticality to the arena by adding obstacles and cliffs
+
+- One of our main challenges has been handling Malmo errors with our high tickrate. We train at ~15x Minecraft's normal rate and this causes issues where we don't get observations for long periods of time sometimes forever.
 
 ## Resources Used
 __RL Algorithms__:<br>
