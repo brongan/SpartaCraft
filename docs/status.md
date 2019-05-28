@@ -26,8 +26,8 @@ We are using Vanilla Policy Gradient to predict actions based on the observation
 We restructured Arthur Juliani's implementation of Vanilla Policy gradient to work with any environment and save checkpoints etc.
 
 {% raw %}
-$$ \nabla_\theta J(\pi_\theta) = \max_{\tau \sim  \pi_\theta} \left[\sum^T_{t=0} \nabla_{\theta}\log \pi_{\theta}(a_t|s_t)A^{\pi \theta}(s_t,a_t)\right]$$ \\
-$$ \theta_{k+1} = \theta_k + \alpha \nabla_{\theta}J(\pi_{\theta_k}) $$ \\
+$$ \nabla_\theta J(\pi_\theta) = E_{\tau \sim  \pi_\theta} \left[\sum^T_{t=0} \nabla_{\theta}\log \pi_{\theta}(a_t|s_t)A^{\pi_\theta}(s_t,a_t)\right]$$
+$$ \theta_{k+1} = \theta_k + \alpha \nabla_{\theta}J(\pi_{\theta_k}) $$
 {% endraw %}
 
 To achieve our baseline goal, we've spawned the agent, equipped with an enchanted sword, and a single zombie in a flat 5x5 room with no obstacles. Both the agent and the zombie consistently appear at the same location. Notably, the location of the zombie isn't represented anywhere in the agent's observation of the environment.
