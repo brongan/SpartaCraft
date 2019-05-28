@@ -2,7 +2,7 @@
 layout: default
 title: Status
 ---
-(put video here)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rSvrI0kUoNo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Project Summary
 Our original goal was to have the agent (Spartos) learn how to fight against three different types of mobs on the field, altering its battle strategy according to the type of mob encountered (passive mobs, aggressive mobs, endless mobs)
