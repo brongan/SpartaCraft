@@ -54,10 +54,11 @@ At any given state, the actions available to the agent are:
 
 ### Rewards
 The agent receives the following rewards for the following events:
-- Agent lands successful hit/kill: +400
-- Agent takes damage: 
+- Agent lands successful hit/kill: +400 (this reward is given to the agent based on damage dealth)
+- Agent takes damage (per damage taken): -5
 - Agent dies: -1000
 - Agent runs out of time: -100
+- Agent doesn't run out of time: 200
 - Time(per agent tick): -1.0
 
 ## Evaluation
@@ -71,6 +72,22 @@ To evaluate our learning model, we developed two agents that we can compare agen
 Quantitatively, we evaluate our agents by the total rewards they generate and amount of time they take per episode.  Our rewards are simple and clearly imply how many enemies died, and whether the agent died/took damage. Most importantly our agent is compared in these metrics with the random agent and the "perfect" agent. 
 
 Qualitatively, our goal is for the agent to appear intelligent. We want it to appear to be as close to an efficient killing machine as possible. This means not wasting time attacking nothing, not walking towards enemies, and taking damage. Realistically this can only be measured by a person watching a video of the agents acting. The "perfect" agent clearly demonstrates a strategy it is using.
+
+
+Here are some graphs from the rewards during our training:
+
+![](ManualAgent.png)
+
+Fig 1. Manual Agent, the agent following the algorithm described above. This graph is the rewards for the agent in a 30x30 maze with 12 zombies and 5 cows. A demo of this agent is included at the end of the video.
+
+![](randomAgent.png)
+
+Fig 2. Initial rewards from our agent taking mostly random actions. The negative rewards is due to taking damage from the stationary zombie or running out of time without successfully killing the zombie.
+
+![](TrainedAgent.png)
+
+Fig 3. Rewards from the agent after 500 episodes of training. We saw that our agent did learn where the zombie is and how to kill, but there were still times were the agent failed to kill the zombie within the first 10 seconds. There were also times where the zombie took more than 400 damage from the sword, which resulted in a higher score (This might be due to difference in where the zombie was hit, e.g. in the head vs the body).
+
 
 ## Remaining Goals & Challenges
 - Put Spartos against a variety of enemies, or a horde of one type of enemy
