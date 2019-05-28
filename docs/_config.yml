@@ -10,6 +10,8 @@ subtitle: 'CS 175: Project in AI (in Minecraft)'
 
 markdown: kramdown
 
+mathjax: True
+
 exclude:
 - README.md
 - LICENSE.md
