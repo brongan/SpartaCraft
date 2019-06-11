@@ -66,6 +66,12 @@ The agent receives the following rewards for the following events:
 - Time(per agent tick): -1.0
 
 ## Evaluation
+We are using the same evaluation metrics as described in the Status Update to evaluate the progress of our improved agent:
+
+Quantitatively, we are evaluating our agent by the total rewards they generate, and by the amount of time it takes for them to complete an episode. Our rewards are simple and clearly imply how many enemies died, and whether the agent died/took damage. We are using a random agent as a baseline, and comparing the random agent with these metrics to the “perfect” agent.
+
+Qualitatively, our goal is for the agent to appear intelligent and behave similarly to a human. We want it to appear to be as close to an efficient killing machine as possible. This means not wasting time attacking nothing, not walking towards enemies, and taking damage. Realistically, this can only be measured by a person watching a video of the agents in action. The “perfect” agent clearly demonstrates a strategy it is using. Please see our video for reference.
+
 (insert graphs here)
 
 ## References
