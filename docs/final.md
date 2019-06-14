@@ -129,7 +129,8 @@ Qualitatively, our goal is for the agent to appear intelligent and behave simila
 
 
 
-<img src="manualRewardFinal.png" />
+<img src="manualRewardFinal.png" />  
+
 Reward graph for our manual agent. Since the change in the environment, the manual agent didn't perform as well as the status report. Although we improved the behaviour of the manual agent so that it doesn't get cornered, the number of spots where the agent can get stuck given the algorithm above were many.
 
 
