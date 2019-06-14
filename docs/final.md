@@ -138,6 +138,15 @@ Reward graph for our manual agent. Since the change in the environment, the manu
 <img src="VPG_Agent_Num_Steps.png" />
 <img src="VPG_Agent_Total_Reward.png" />
 
+Reward and number of steps for our Vanilla Policy Gradient agent. This is the initial reward 
+
+<img src="RunnerSteps.png" />
+<img src="RunnerReward.png" />
+
+Reward and number of steps for our Vanilla Policy Gradient agent that runs away. For the training of this agent, 
+we didn't reward the agent for killing the zombies. Therefore the agent learned how to run away by going in circles.
+
+
 ## References
 ### RL Algorithms:
 - http://incompleteideas.net/book/RLbook2018.pdf
