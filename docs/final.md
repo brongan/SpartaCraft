@@ -21,6 +21,13 @@ Just on pure observation of the random agent alone, it is clear why AI/ML algori
 ### Algorithm
 We are using Vanilla Policy Gradient as our reinforcment learning algorithm. We've experimented with partially observed states and have found the algorithm to really struggle with human level actions with limited observations. For the final implementation of our project, we give the agent a grid view of nearby zombies relative to his position. We also give Spartos information about his velocity and angle. Notably, we don't give him the position of the walls of the arena. (This was chosen to standardize the information available with our hard-coded agent for comparison).
 
+A simplified version of our algorithm is as follows:
+- First we take the probability distribution output by the neural network and use that as the probabilities for each action taken.
+- Next we take the action and get back a reward and a new observation.
+- Then we store the new state for the next iteration.
+- For each step, we compute the gradients for all trainable variables with the VPG loss function.
+- The gradients are added over every 5 episodes and then the update function is applied.
+
 #### Neural Network Architecure
 The first layers of our neural network use the two consecutive layers of the classic Conv2d, ReLu, MaxPooling, Dropout combination to generate a feature vector representing the state of the zombies near the agent. This is concatenated with the agent's position information vector. Two dense layers then output action probabilities.
 
