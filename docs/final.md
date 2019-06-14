@@ -3,7 +3,8 @@ layout: default
 title: Final Report
 ---
 ## Spartos Video
-(embed vid here)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GM6M6QyqzAs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Project Summary
 Our ultimate goal for this Project in AI course was to create a Minecraft fighter bot, dubbed Spartos, whose survival instincts and tactical skills in the battle arena surpassed all others. In the original planning stages, we had envisioned a bot that was able to fight mobs in three scenarios in an arena: passive mobs, aggressive mobs, and endless mobs.
