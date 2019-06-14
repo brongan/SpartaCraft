@@ -127,6 +127,12 @@ Quantitatively, we are evaluating our agent by the total rewards they generate, 
 
 Qualitatively, our goal is for the agent to appear intelligent and behave similarly to a human. We want it to appear to be as close to an efficient killing machine as possible. This means not wasting time attacking nothing, not walking towards enemies, and taking damage. Realistically, this can only be measured by a person watching a video of the agents in action. The “perfect” agent clearly demonstrates a strategy it is using. Please see our video for reference.
 
+
+
+<img src="manualRewardFinal.png" />
+Reward graph for our manual agent. Since the change in the environment, the manual agent didn't perform as well as the status report. Although we improved the behaviour of the manual agent so that it doesn't get cornered, the number of spots where the agent can get stuck given the algorithm above were many.
+
+
 (insert graphs here)
 
 ## References
