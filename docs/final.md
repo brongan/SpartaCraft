@@ -23,6 +23,8 @@ We are using Vanilla Policy Gradient as our reinforcment learning algorithm. We'
 #### Neural Network Architecure
 The first layers of our neural network use the two consecutive layers of the classic Conv2d, ReLu, MaxPooling, Dropout combination to generate a feature vector representing the state of the zombies near the agent. This is concatenated with the agent's position information vector. Two dense layers then output action probabilities.
 
+<img src="nn.png" width="600" height="400" />
+
 #### Vanilla Policy Gradient:
 We restructured Arthur Juliani's implementation of Vanilla Policy gradient to work with our environment and save checkpoints etc.
 
@@ -48,7 +50,8 @@ The algorithm receives as input the state, which is made up of:
 - A 20x20 grid view of the zombies positions relative to the agent's position.
 - A vector of Spartos' [velocity_x, velocity_z, cos(yaw), sin(yaw)] 
 
-Example:
+#### Example:
+```
 zombies: [[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
@@ -69,6 +72,7 @@ zombies: [[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
+
 wallz: [[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
@@ -90,7 +94,7 @@ wallz: [[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
 player_state: [ 2.86183589e-02  1.70628617e-05  1.54251450e-01 -9.88031624e-01]
-
+```
 ### Actions
 At any given state, the actions available to the agent are:
 ["forward 1", "back 1", "left 1", "right 1", "attack 1", "attack 0"]
