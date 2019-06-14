@@ -37,7 +37,11 @@ $$ \theta_{k+1} = \theta_k + \alpha \nabla_{\theta}J(\pi_{\theta_k}) $$
 Using Malmo's "HumanLevelCommands", our agent selects actions analogous to human key presses. It then receives an observation after 4 Minecraft ticks. We discretized time and our action space this way as our goal is to have the agent appear to act as humanly as possible.
 
 ### Environment
-To achieve our final goal, we increased the size of the arena to a rounded 20x30 rectangle, spawned a randomly placed horde of 12 zombies.
+To achieve our final goal, we increased the size of the arena to a rounded 20x30 rectansgle, spawned a randomly placed horde of 12 zombies.
+
+
+<img src="arenaCyl.png" width="600" height="400" />
+
 
 ### State Representation
 The algorithm receives as input the state, which is made up of:
@@ -65,6 +69,12 @@ The agent receives the following rewards for the following events:
 
 ## Evaluation
 We are using the same evaluation metrics as described in the Status Update to evaluate the progress of our improved agent:
+1. Agent taking random actions (same action space as our agent) throughout an entire duration of an episode.
+2. Agent (manual Agent) following an algorithm that can form the zombies into a train, and take the ones that get close. Our previous manual agent didn't do well when we changed the layout of our environment to a cylindrical one, so we changed our algorithm for it.
+
+This new algorithm consists of scoring the importance of each zombie based on their distance to the player, and then using that score to determine which direction the player needs to turn to. In addition to turning, the agent moves backward with a probability of 75% and forward otherwise. Seperatly with a probability of 45%, the agent decides to strafe left or right with equal probability. 
+
+
 
 Quantitatively, we are evaluating our agent by the total rewards they generate, and by the amount of time it takes for them to complete an episode. Our rewards are simple and clearly imply how many enemies died, and whether the agent died/took damage. We are using a random agent as a baseline, and comparing the random agent with these metrics to the “perfect” agent.
 
