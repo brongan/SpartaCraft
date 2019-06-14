@@ -43,6 +43,34 @@ $$ \nabla_\theta J(\pi_\theta) = E_{\tau \sim  \pi_\theta} \left[\sum^T_{t=0} \n
 $$ \theta_{k+1} = \theta_k + \alpha \nabla_{\theta}J(\pi_{\theta_k}) $$
 {% endraw %}
 
+
+The following extracts the feature from the grid world.
+```python
+grid_world_feature_extraction = tf.keras.models.Sequential([
+            tf.keras.layers.Conv2D(32, 3, activation=tf.nn.relu, name='cnn1'),
+            tf.keras.layers.MaxPool2D(),
+            tf.keras.layers.Dropout(.2),
+            tf.keras.layers.Conv2D(16, 3, activation=tf.nn.relu, name='cnn2'),
+            tf.keras.layers.MaxPool2D(),
+            tf.keras.layers.Dropout(.2),
+            tf.keras.layers.Flatten(),
+        ])
+```
+
+Then, we need to combine the grid world feature vector with the player state vector to get the action probability distribution. To do so, we did:
+```python
+model = tf.keras.models.Sequential([
+            tf.keras.layers.Dense(self.h_size, activation=tf.nn.relu, name='dense1'),
+            tf.keras.layers.Dense(self.a_size, activation=tf.nn.softmax, name='dense2')
+        ])
+```
+
+
+#### Proximal Policy Optimization:
+We tried implementing the proximal policty optimization algorithm for our agent. PPO is far more complex than the Vanilla Policy Gradient and therefore, we decided to go with VPG.  
+Our implementation for the PPO is on our GitHub, but is uncomplete.
+
+
 #### MDP
 Using Malmo's "HumanLevelCommands", our agent selects actions analogous to human key presses. It then receives an observation after 4 Minecraft ticks. We discretized time and our action space this way as our goal is to have the agent appear to act as humanly as possible.
 
@@ -51,6 +79,7 @@ To achieve our final goal, we increased the size of the arena to a rounded 20x30
 
 
 <img src="arenaCyl.png" width="600" height="400" />
+
 
 
 ### State Representation
@@ -103,6 +132,8 @@ wallz: [[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
 player_state: [ 2.86183589e-02  1.70628617e-05  1.54251450e-01 -9.88031624e-01]
 ```
+
+
 ### Actions
 At any given state, the actions available to the agent are:
 ["forward 1", "back 1", "left 1", "right 1", "attack 1", "attack 0"]
