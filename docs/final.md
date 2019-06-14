@@ -6,24 +6,25 @@ title: Final Report
 (embed vid here)
 
 ## Project Summary
-Our ultimate goal for this Project in AI course was to create a Minecraft fighter bot, dubbed Spartos, whose survival instincts and tactical skills in the battle arena surpassed all others. In the original planning stages, we had envisioned a bot that was able to conquer 3 types of mobs in the arena: passive mobs, aggressive mobs, and endless mobs.
+Our ultimate goal for this Project in AI course was to create a Minecraft fighter bot, dubbed Spartos, whose survival instincts and tactical skills in the battle arena surpassed all others. In the original planning stages, we had envisioned a bot that was able to fight mobs in three scenarios in an arena: passive mobs, aggressive mobs, and endless mobs.
 
 ### Progress Iterations
-Over the course of the quarter, we narrowed and refined our problem specifications to create the final iteration of Spartos: a fighter bot who specializes in the efficient eradication of aggressive mobs, specifically an aggressive mob of zombies.
+Over the course of the quarter, we narrowed and refined our problem specifications to create the final iteration of Spartos: a fighter bot who specializes in the efficient eradication of aggressive mobs, specifically zombies.
 
-To achieve this goal Spartos, we first distilled the problem to its simplest terms and built up from there. We began with a random agent in a small arena, with a single, non-pursuing zombie as its enemy. As Spartos adapted to this simple environment, we increased the difficulty: increasing the size of the arena, allowing the zombie to pursue Spartos, and increasing the number of zombies spawned.
+To achieve this goal Spartos, we first distilled the problem to its simplest terms and built up from there. We began with a random agent in a small arena, with a single, non-pursuing zombie as its enemy. As Spartos adapted to this simple environment, we increased the difficulty: increasing the size of the arena, allowing the zombie to pursue Spartos, and increasing the number of zombies spawned. This allowed us to test our implementations of reinforcement learning algorithms. We tested Tabular Q-Learning, Deep Q-Learning, and Vanilla Policy Gradient(VPG) and attempted to implement Proximal Policy Optimization. VPG hit the sweet spot for us between ease of implementation and feasibility for our problem environment. 
 
 ### An AI Problem
 Just on pure observation of the random agent alone, it is clear why AI/ML algorithms are needed for this problem. Even when we broke our problem down to its simplest terms, the random agent struggles with simply locating its opponent (see our Status video for a demonstration of this). And when we scaled our problem up to its final iteration (pursuant enemies in a large field), a random agent could not conceivably or consistently survive. Machine learning is necessary to solve our proposed problem in any significant way; the agent must learn to seek out its enemies, swing its sword when in range, and, if necessary, evade their attacks. (Please see below for specific details of our implementation approach.)
 
 ## Approaches
 ### Algorithm
-We are using Vanilla Policy Gradient as our reinforcment learning algorithm. We've experimented with observing position and position + velocity. Currently, we have position and velocity represented as floats for the x and z dimensions.
+We are using Vanilla Policy Gradient as our reinforcment learning algorithm. We've experimented with partially observed states and have found the algorithm to really struggle with human level actions with limited observations. For the final implementation of our project, we give the agent a grid view of nearby zombies relative to his position. We also give Spartos information about his velocity and angle. Notably, we don't give him the position of the walls of the arena. (This was chosen to standardize the information available with our hard-coded agent for comparison).
 
-In our Baseline scenario, the agent receives as its observation solely it's current position. The Vanilla Policy Gradient algorithm predicts action probabilities and an action is selected based on those probabilities. Notably, it observes nothing related to the location of the zombie in the room. Weights are updated every 5 episodes based on the discounted rewards over each episode. 
+#### Neural Network Architecure
+The first layers of our neural network use the two consecutive layers of the classic Conv2d, ReLu, MaxPooling, Dropout combination to generate a feature vector representing the state of the zombies near the agent. This is concatenated with the agent's position information vector. Two dense layers then output action probabilities.
 
 #### Vanilla Policy Gradient:
-We restructured Arthur Juliani's implementation of Vanilla Policy gradient to work with any environment and save checkpoints etc.
+We restructured Arthur Juliani's implementation of Vanilla Policy gradient to work with our environment and save checkpoints etc.
 
 Gradient Calculation and Update Equation:
 
@@ -35,16 +36,13 @@ $$ \theta_{k+1} = \theta_k + \alpha \nabla_{\theta}J(\pi_{\theta_k}) $$
 #### MDP
 Using Malmo's "HumanLevelCommands", our agent selects actions analogous to human key presses. It then receives an observation after 4 Minecraft ticks. We discretized time and our action space this way as our goal is to have the agent appear to act as humanly as possible.
 
-### Environment Representation
-To achieve our baseline goal, we spawned the agent, equipped with an enchanted sword, and a single zombie in a flat 5x5 room with no obstacles. Both the agent and the zombie consistently appear at the same location. Notably, the location of the zombie isn't represented anywhere in the agent's observation of the environment.
-
-To achieve our final goal, we increased the size of the arena to 30x30, spawned a horde of 12 aggressive zombies and 5 passive cows. We  represent these observations with multiple enemies as gridworlds and added convolutional layer(s) to our neural network.
+### Environment
+To achieve our final goal, we increased the size of the arena to a rounded 20x30 rectangle, spawned a randomly placed horde of 12 zombies.
 
 ### State Representation
 The algorithm receives as input the state, which is made up of:
-- Coordinates of the agent
-- Health of agent
-- Total health of enemies in a given tile
+- A 20x20 grid view of the zombies positions relative to the agent's position.
+- A vector of Spartos' [velocity_x, velocity_z, cos(yaw), sin(yaw)] 
 
 ### Actions
 At any given state, the actions available to the agent are:
@@ -58,7 +56,7 @@ At any given state, the actions available to the agent are:
 
 ### Rewards
 The agent receives the following rewards for the following events:
-- Agent lands successful hit/kill: +400 (this reward is given to the agent based on damage dealt)
+- Agent kills zombie: +1000
 - Agent takes damage (per damage taken): -5
 - Agent dies: -1000
 - Agent runs out of time: -100
